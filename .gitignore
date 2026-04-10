@@ -1,0 +1,6 @@
+.vscode/
+data/
+models/
+sam3/
+sam3.1_multiplex.pt
+webcam-sam3.py

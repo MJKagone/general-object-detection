@@ -1,0 +1,16 @@
+name: cv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - scikit-image
+  - opencv
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - ipykernel
+  - ultralytics
+  - torchvision
+  - pytorch
+prefix: /home/miro/miniconda3/envs/cv

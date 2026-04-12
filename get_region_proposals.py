@@ -77,15 +77,16 @@ def get_region_proposals(image_bytes, to_detect):
         messages= [
                     {
                         "role": "user",
-                        "content": f"""Look at this image and find the object of interest: '{to_detect}'.
+                        "content": f"""Look at this image and find regions that look like they might contain the object of interest: '{to_detect}'. The regions will be forwarded to a downstream model for further analysis.
                         
-                        1. First, briefly describe the areas in the image that look like they might contain the object and where they are located.
+                        1. First, briefly describe the areas in the image that look like they might contain an instance of the object and where they are located.
                         2. Then, map that location to the overlayed grid.
                         3. Finally, provide the exact grid cells as a JSON list of lists. The regions can be individual cells (e.g., "A1") or groups of adjacent cells (e.g., "C2, C3, D2, D3").
                         
                         Example final output format:
                         Coordinates: ["A1", "C2, C3, D2, D3"]
-                        """
+                        """,
+                        "images": [image_bytes]
                     }
                 ]
     )

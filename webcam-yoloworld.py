@@ -43,9 +43,9 @@ def get_class_color(class_id):
         
         # Boost a channel to prevent overly dark bounding boxes
         if r < 100 and g < 100 and b < 100:
-            channel = random.choice(['b', 'g', 'r'])
-            if channel == 'b': b = random.randint(150, 255)
-            elif channel == 'g': g = random.randint(150, 255)
+            channel = random.choice(["b", "g", "r"])
+            if channel == "b": b = random.randint(150, 255)
+            elif channel == "g": g = random.randint(150, 255)
             else: r = random.randint(150, 255)
             
         return (b, g, r)
@@ -95,9 +95,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     model = YOLOWorld("models/yolov8x-worldv2.pt")
-    model.set_classes(["eye", "mouth", "nose", "ear", "teeth", "finger", ""])
-    # model.set_classes(["cooling fan", "GPU", "electrical cables", "CPU", "motherboard", "input port", ""])
-    # model.set_classes(["book", "toy figure", "plush toy", ""])
+    if not args.image:
+        model.set_classes(["eye", "mouth", "nose", "ear", "teeth", "finger", ""])
+    elif "pc" in args.image.lower():
+        model.set_classes(["cooling fan", "GPU", "electrical cables", "motherboard", ""])
+    elif "shelf" in args.image.lower():
+        model.set_classes(["book", "toy figure", "plush toy", ""])
     camera = cv.VideoCapture(0)
     dim = (int(camera.get(cv.CAP_PROP_FRAME_WIDTH)), int(camera.get(cv.CAP_PROP_FRAME_HEIGHT)))
     fps = camera.get(cv.CAP_PROP_FPS)
@@ -117,7 +120,7 @@ if __name__ == "__main__":
         cv.namedWindow("OpenCV", cv.WINDOW_NORMAL)
         cv.resizeWindow("OpenCV", 1080, 720)
 
-        results = model(img, imgsz=get_imgsz(img.shape[:2]), conf=0.05, verbose=False)
+        results = model(img, imgsz=get_imgsz(img.shape[:2]), conf=0.05, iou=0.25, verbose=False)
         # Calculate a dynamic scale factor based on the image width
         # (Assuming a 1080px wide image looks good with default settings)
         scale_ratio = img.shape[1] / 1080.0

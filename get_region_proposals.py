@@ -54,7 +54,7 @@ def overlay_grid(img, num_patches):
             end_w = start_w + offset_w
             end_h = start_h + offset_h
 
-            cv.rectangle(img_copy, (start_w, start_h), (end_w-1, end_h-1), (0, 0, 255), 1)
+            cv.rectangle(img_copy, (start_w, start_h), (end_w-1, end_h-1), (0, 0, 255), 2)
 
     return img_copy
 
@@ -64,7 +64,7 @@ def get_region_proposals(image_bytes, to_detect):
     
     Args:
         image_bytes: The image data in bytes format.
-        to_detect: A string describing the object we want to detect (e.g., "dog").
+        to_detect: A string describing the object we want to detect (e.g., 'dog').
     
     Returns:
         A list of proposed regions in grid coordinates (e.g., ["A1", "C2, C3, D2, D3"]).
@@ -73,7 +73,7 @@ def get_region_proposals(image_bytes, to_detect):
     print("🤖 Analyzing image with VLM...")
 
     response = chat(
-        model="qwen3.5",
+        model="gemma4",
         messages= [
                     {
                         "role": "user",
@@ -84,7 +84,9 @@ def get_region_proposals(image_bytes, to_detect):
                         3. Finally, provide the exact grid cells as a JSON list of lists. The regions can be individual cells (e.g., "A1") or groups of adjacent cells (e.g., "C2, C3, D2, D3").
                         
                         Example final output format:
-                        Coordinates: ["A1", "C2, C3, D2, D3"]
+                        [
+                            {{"Coordinates": [("A1"), ("C2", "C3", "D2", "D3")]}}
+                        ]
                         """,
                         "images": [image_bytes]
                     }
@@ -105,10 +107,10 @@ if __name__ == "__main__":
     img = cv.imread(args.image)
     img_grid = overlay_grid(img, 5*5)
     cv.imwrite("data/image_grid.jpg", img_grid)
-    _, img_encoded = cv.imencode('.jpg', img_grid)
+    _, img_encoded = cv.imencode(".jpg", img_grid)
     img_bytes = img_encoded.tobytes()
     if img_bytes:
         regions = get_region_proposals(img_bytes, args.to_detect)
-        print("Proposed regions (in grid coordinates):", regions)
+        print(regions)
     else:
         print("Failed to read image or convert to bytes.")

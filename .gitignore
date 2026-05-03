@@ -1,6 +1,5 @@
 __pycache__/
 .vscode/
-data/
 models/
 sam3/
 sam3.1_multiplex.pt

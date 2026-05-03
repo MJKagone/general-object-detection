@@ -1,5 +1,7 @@
+import math
 import random
 import cv2 as cv
+import numpy as np
 
 COLORS_RGB = [
     (255, 0, 0),     # 0: Red
@@ -95,3 +97,57 @@ def draw_bounding_boxes(frame, model, results, box_thickness=2, text_scale=0.5, 
             label_text = f"{class_name} {confidence:.2f}"
             cv.rectangle(frame, (int(x1)-1, int(y1)-20), (int(x2)+1, int(y1)), color, -1)
             cv.putText(frame, label_text, (int(x1)+1, int(y1)-5), cv.FONT_HERSHEY_SIMPLEX, 0.5, (5, 5, 5), 2)
+
+def overlay_grid(img, num_patches):
+    """
+    Takes an image, divides it into patches and overlays a grid on the original image to show the patch boundaries.
+
+    Args:
+        img: The image to be divided into patches. Can be a file path or a numpy image array.
+        num_patches: The number of patches to be created. Must be a perfect square.
+        
+    Returns:
+        A copy of the original image with rectangles drawn around the patches.
+    """
+
+    if not math.sqrt(num_patches).is_integer():
+        raise ValueError("num_patches must be a perfect square")
+    
+    if isinstance(img, str):
+        img = cv.imread(img)
+        if img is None:
+            raise FileNotFoundError(f"Could not read image from path: {img}")
+    elif isinstance(img, np.ndarray):
+        img = img
+    else:
+        raise TypeError("img must be a file path or a numpy image array")
+    
+    h, w, _ = img.shape
+
+    offset = int(math.sqrt(num_patches))
+    offset_w = int(w / offset)
+    offset_h = int(h / offset)
+
+    padding = 40
+    # Add padding to the top and left for labels
+    img_copy = cv.copyMakeBorder(img, padding, 0, padding, 0, cv.BORDER_CONSTANT, value=[0, 0, 0])
+
+    for row in range(offset):
+        # Draw row label (A, B, C...)
+        text_y = padding + row * offset_h + offset_h // 2
+        cv.putText(img_copy, chr(65 + row), (10, text_y), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
+        for col in range(offset):
+            if row == 0:
+                # Draw col label (1, 2, 3...)
+                text_x = padding + col * offset_w + offset_w // 2 - 10
+                cv.putText(img_copy, str(col + 1), (text_x, padding - 10), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
+            start_w = padding + col * offset_w
+            start_h = padding + row * offset_h
+            end_w = start_w + offset_w
+            end_h = start_h + offset_h
+
+            cv.rectangle(img_copy, (start_w, start_h), (end_w-1, end_h-1), (0, 0, 255), 2)
+
+    return img_copy

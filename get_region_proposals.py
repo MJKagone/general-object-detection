@@ -94,8 +94,6 @@ def get_region_proposals(image_bytes, to_detect):
     )
     return response.message.content.strip()
 
-# CLI usage: python query.py [url] (defaults to vision model, which seems to perform better)
-# CLI usage: python query.py -m both [url] (to see both vision and text predictions)
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()

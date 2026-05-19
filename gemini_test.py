@@ -6,21 +6,54 @@ from PIL import Image
 import json
 import cv2 as cv
 
-def main(image_path, prompt):
-
-    img = Image.open(image_path)
-
-    client = genai.Client()
+def query_by_text(client, config, img, prompt):
     prompt = f"Detect all instances of the following object in the image: <<{prompt}>>. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
-
-    config = types.GenerateContentConfig(
-    response_mime_type="application/json"
-    )
-
+    # config = types.GenerateContentConfig(
+    # response_mime_type="application/json"
+    # )
     response = client.models.generate_content(model="gemini-3-flash-preview",
                                             contents=[img, prompt],
                                             config=config
                                             )
+    return response
+
+def query_by_image(client, config, img1, img2):
+    prompt = f"Detect all instances of the object(s) highlighted in the second image from the first image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
+    # config = types.GenerateContentConfig(
+    # response_mime_type="application/json"
+    # )
+    response = client.models.generate_content(model="gemini-3-flash-preview",
+                                            contents=[img1, img2, prompt],
+                                            config=config
+                                            )
+    return response
+
+def query_by_bbox(client, config, img):
+    prompt = f"Is the provided bounding box oprtimal for the highlighted object? If not, provide a better bounding box. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
+    # config = types.GenerateContentConfig(
+    # response_mime_type="application/json"
+    # )
+    response = client.models.generate_content(model="gemini-3-flash-preview",
+                                            contents=[img, prompt],
+                                            config=config
+                                            )
+    return response
+
+def main(client, config, image_path, input_prompt):
+
+    img = Image.open(image_path)
+    
+    try:
+        img2 = Image.open(input_prompt)
+        if input_prompt == image_path + "_bboxes.jpg":
+            response = query_by_bbox(client, config, img)
+        else:
+            response = query_by_image(client, config, img, img2)
+    except FileNotFoundError:
+        response = query_by_text(client, config, img, input_prompt)
+
+    
+    # print("Raw response:", response.text)
 
     width, height = img.size
     bounding_boxes = json.loads(response.text)
@@ -54,4 +87,9 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--prompt", type=str, help="The object to find in the image")
     args = parser.parse_args()
 
-    main(args.image, args.prompt)
+    client = genai.Client()
+    config = types.GenerateContentConfig(
+        response_mime_type="application/json"
+    )
+
+    main(client, config, args.image, args.prompt)

@@ -8,9 +8,6 @@ import cv2 as cv
 
 def query_by_text(client, config, img, prompt):
     prompt = f"Detect all instances of the following object in the image: <<{prompt}>>. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
-    # config = types.GenerateContentConfig(
-    # response_mime_type="application/json"
-    # )
     response = client.models.generate_content(model="gemini-3-flash-preview",
                                             contents=[img, prompt],
                                             config=config
@@ -19,9 +16,6 @@ def query_by_text(client, config, img, prompt):
 
 def query_by_image(client, config, img1, img2):
     prompt = f"Detect all instances of the object(s) highlighted in the second image from the first image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
-    # config = types.GenerateContentConfig(
-    # response_mime_type="application/json"
-    # )
     response = client.models.generate_content(model="gemini-3-flash-preview",
                                             contents=[img1, img2, prompt],
                                             config=config
@@ -30,9 +24,6 @@ def query_by_image(client, config, img1, img2):
 
 def query_by_bbox(client, config, img):
     prompt = f"Is the provided bounding box oprtimal for the highlighted object? If not, provide a better bounding box. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
-    # config = types.GenerateContentConfig(
-    # response_mime_type="application/json"
-    # )
     response = client.models.generate_content(model="gemini-3-flash-preview",
                                             contents=[img, prompt],
                                             config=config

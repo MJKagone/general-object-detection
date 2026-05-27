@@ -1,6 +1,7 @@
 __pycache__/
 .vscode/
 models/
-sam3/
+sam3-old/
+sam3-repo/
 sam3.1_multiplex.pt
 webcam-sam3.py

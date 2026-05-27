@@ -60,6 +60,12 @@ def main(client, config, image_path, input_prompt):
     # print("Image size: ", width, height)
     # print("Bounding boxes:", converted_bounding_boxes)
 
+    # Save converted bounding boxes to json
+    output_json_path = os.path.join("data", f"{os.path.splitext(os.path.basename(image_path))[0]}_bboxes.json")
+    os.makedirs("data", exist_ok=True)
+    with open(output_json_path, "w") as f:
+        json.dump(converted_bounding_boxes, f)
+
     img = cv.imread(image_path)
     for box in converted_bounding_boxes:
         cv.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 0), 2)

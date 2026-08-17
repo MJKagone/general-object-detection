@@ -116,7 +116,7 @@ if __name__ == "__main__":
             outputs = model(**inputs)
 
         # Post-process (convert outputs to bounding boxes)
-        # box_threshold handles how confident it needs to be an object
+        # threshold handles how confident it needs to be an object
         # text_threshold handles how confident it matches your text
         results = processor.post_process_grounded_object_detection(
             outputs,

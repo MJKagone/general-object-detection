@@ -1,7 +1,14 @@
 __pycache__/
 .vscode/
+.env
 models/
+data/PACO/
 sam3-old/
 sam3-repo/
 sam3.1_multiplex.pt
 webcam-sam3.py
+EgoObjects/
+Ego4d/
+data/
+weights/
+results/predictions/

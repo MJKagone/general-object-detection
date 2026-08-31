@@ -1,53 +1,161 @@
-(ovod) miro@spectra-120:~/Code/Projects/general-object-detection$ python egoobjects_eval.py --model yoloworld --num-processes 0
-2026-08-17 13:07:26,524 [INFO] annotation_path EgoObjects/data/EgoObjectsV1_unified_eval.json
-2026-08-17 13:07:27,982 [INFO] num cat det instances 196123
-2026-08-17 13:07:27,982 [INFO] num inst det instances 185467
-2026-08-17 13:07:27,982 [INFO] Creating index.
-2026-08-17 13:07:28,017 [INFO] cat_det, len img_ann_map 35165
-2026-08-17 13:07:28,044 [INFO] inst_det, len img_ann_map 35028
-2026-08-17 13:07:30,535 [INFO] num total images: 35165
-2026-08-17 13:07:30,535 [INFO] num images for cat_det: 35165
-2026-08-17 13:07:30,535 [INFO] num annotations for cat_det 196123
-2026-08-17 13:07:30,535 [INFO] num object categories of cat_det 638
-2026-08-17 13:07:30,535 [INFO] num classes of cat_det 638
-2026-08-17 13:07:30,535 [INFO] num images for inst_det: 35028
-2026-08-17 13:07:30,535 [INFO] num annotations for inst_det 185467
-2026-08-17 13:07:30,535 [INFO] num object categories of inst_det 251
-2026-08-17 13:07:30,535 [INFO] num classes of inst_det 4098
-2026-08-17 13:07:30,535 [INFO] Index created.
+(ovod) miro@spectra-120:~/Code/Projects/general-object-detection$ p3 egoobjects_eval.py --model yoloworld --percentage 1
+2026-08-26 15:27:48,318 [INFO] annotation_path EgoObjects/data/EgoObjectsV1_unified_eval.json
+2026-08-26 15:27:49,743 [INFO] num cat det instances 196123
+2026-08-26 15:27:49,743 [INFO] num inst det instances 185467
+2026-08-26 15:27:49,743 [INFO] Creating index.
+2026-08-26 15:27:49,782 [INFO] cat_det, len img_ann_map 35165
+2026-08-26 15:27:49,913 [INFO] inst_det, len img_ann_map 35028
+2026-08-26 15:27:52,504 [INFO] num total images: 35165
+2026-08-26 15:27:52,504 [INFO] num images for cat_det: 35165
+2026-08-26 15:27:52,504 [INFO] num annotations for cat_det 196123
+2026-08-26 15:27:52,504 [INFO] num object categories of cat_det 638
+2026-08-26 15:27:52,504 [INFO] num classes of cat_det 638
+2026-08-26 15:27:52,504 [INFO] num images for inst_det: 35028
+2026-08-26 15:27:52,504 [INFO] num annotations for inst_det 185467
+2026-08-26 15:27:52,504 [INFO] num object categories of inst_det 251
+2026-08-26 15:27:52,504 [INFO] num classes of inst_det 4098
+2026-08-26 15:27:52,504 [INFO] Index created.
 No cached predictions found. Starting model inference...
-Saving predictions checkpoint to results/predictions/EgoObjects_predictions_yoloworld.json...
-2026-08-17 13:16:23,698 [INFO] Generating 40 sanity check images in results/sanity_checks...
-Evaluating 755734 detections...
+Saving predictions checkpoint to results/predictions/EgoObjects_predictions_yoloworld_1pct_seed42.json...
+2026-08-26 15:28:05,341 [INFO] Generating 40 sanity check images in results/sanity_checks...
+Evaluating 28492 detections...
 Using 1 CPU processes for evaluation.
-2026-08-17 13:16:23,920 [INFO] num category detections 755734
-2026-08-17 13:16:23,920 [INFO] num instance detections 0
-2026-08-17 13:16:36,074 [INFO] after limit detections per image, len inst_det 0
-2026-08-17 13:16:36,199 [INFO] Creating index.
-2026-08-17 13:16:36,295 [INFO] cat_det, len img_ann_map 35158
-2026-08-17 13:16:36,295 [INFO] inst_det, len img_ann_map 0
-2026-08-17 13:16:36,661 [INFO] num total images: 35165
-2026-08-17 13:16:36,661 [INFO] num images for cat_det: 35158
-2026-08-17 13:16:36,661 [INFO] num annotations for cat_det 755734
-2026-08-17 13:16:36,661 [INFO] num object categories of cat_det 638
-2026-08-17 13:16:36,661 [INFO] num classes of cat_det 638
-2026-08-17 13:16:36,661 [INFO] num images for inst_det: 0
-2026-08-17 13:16:36,661 [INFO] num annotations for inst_det 0
-2026-08-17 13:16:36,661 [INFO] num object categories of inst_det 251
-2026-08-17 13:16:36,661 [INFO] num classes of inst_det 0
-2026-08-17 13:16:36,661 [INFO] Index created.
-2026-08-17 13:16:36,704 [INFO] cat_det, num class ids 638
-2026-08-17 13:16:36,704 [INFO] Running per image evaluation for cat_det.
-2026-08-17 13:16:36,704 [INFO] cat_det, len params img_ids 35165
-2026-08-17 13:16:36,704 [INFO] cat_det, len params class_ids 638
-2026-08-17 13:16:36,926 [INFO] cat_det, len gts 196123
-2026-08-17 13:16:36,926 [INFO] cat_det, len dts 755734
-2026-08-17 13:41:43,928 [INFO] num_processes 1
-2026-08-17 13:51:05,470 [INFO] Elapsed time of cat_det evaluate(): 2068.77 sec
-2026-08-17 13:51:06,973 [INFO] Accumulating evaluation results for cat_det.
-2026-08-17 13:51:11,992 [INFO] Summarize detection results for cat_det.
-2026-08-17 13:51:12,659 [INFO] print results for cat_det
-2026-08-17 13:51:12,659 [INFO]  AP           @[ IoU=0.50:0.95 | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.241
-2026-08-17 13:51:12,659 [INFO]  AP           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.301
-2026-08-17 13:51:12,659 [INFO]  AP           @[ IoU=0.75      | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.263
-2026-08-17 13:51:12,659 [INFO]  AR           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.355
+2026-08-26 15:28:05,604 [INFO] num category detections 28492
+2026-08-26 15:28:05,605 [INFO] num instance detections 0
+2026-08-26 15:28:18,156 [INFO] after limit detections per image, len inst_det 0
+2026-08-26 15:28:18,159 [INFO] Creating index.
+2026-08-26 15:28:18,164 [INFO] cat_det, len img_ann_map 351
+2026-08-26 15:28:18,164 [INFO] inst_det, len img_ann_map 0
+2026-08-26 15:28:18,627 [INFO] num total images: 35165
+2026-08-26 15:28:18,627 [INFO] num images for cat_det: 351
+2026-08-26 15:28:18,627 [INFO] num annotations for cat_det 24638
+2026-08-26 15:28:18,627 [INFO] num object categories of cat_det 638
+2026-08-26 15:28:18,627 [INFO] num classes of cat_det 638
+2026-08-26 15:28:18,627 [INFO] num images for inst_det: 0
+2026-08-26 15:28:18,627 [INFO] num annotations for inst_det 0
+2026-08-26 15:28:18,627 [INFO] num object categories of inst_det 251
+2026-08-26 15:28:18,627 [INFO] num classes of inst_det 0
+2026-08-26 15:28:18,627 [INFO] Index created.
+2026-08-26 15:28:18,629 [INFO] cat_det, num class ids 638
+2026-08-26 15:28:18,629 [INFO] Running per image evaluation for cat_det.
+2026-08-26 15:28:18,629 [INFO] cat_det, len params img_ids 351
+2026-08-26 15:28:18,629 [INFO] cat_det, len params class_ids 638
+2026-08-26 15:28:18,632 [INFO] cat_det, len gts 1913
+2026-08-26 15:28:18,632 [INFO] cat_det, len dts 24638
+2026-08-26 15:28:21,902 [INFO] num_processes 1
+2026-08-26 15:28:23,185 [INFO] Elapsed time of cat_det evaluate(): 4.56 sec
+2026-08-26 15:28:23,194 [INFO] Accumulating evaluation results for cat_det.
+2026-08-26 15:28:23,247 [INFO] Summarize detection results for cat_det.
+2026-08-26 15:28:23,261 [INFO] print results for cat_det
+2026-08-26 15:28:23,261 [INFO]  AP           @[ IoU=0.50:0.95 | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] =0.295
+2026-08-26 15:28:23,261 [INFO]  AP           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] =0.372
+2026-08-26 15:28:23,261 [INFO]  AP           @[ IoU=0.75      | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] =0.318
+2026-08-26 15:28:23,261 [INFO]  AR           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] =0.431
+
+(ovod) miro@spectra-120:~/Code/Projects/general-object-detection$ p3 egoobjects_eval.py --model gdino --percentage 1
+2026-08-26 15:29:10,311 [INFO] annotation_path EgoObjects/data/EgoObjectsV1_unified_eval.json
+2026-08-26 15:29:11,698 [INFO] num cat det instances 196123
+2026-08-26 15:29:11,699 [INFO] num inst det instances 185467
+2026-08-26 15:29:11,699 [INFO] Creating index.
+2026-08-26 15:29:11,737 [INFO] cat_det, len img_ann_map 35165
+2026-08-26 15:29:11,868 [INFO] inst_det, len img_ann_map 35028
+2026-08-26 15:29:14,441 [INFO] num total images: 35165
+2026-08-26 15:29:14,441 [INFO] num images for cat_det: 35165
+2026-08-26 15:29:14,441 [INFO] num annotations for cat_det 196123
+2026-08-26 15:29:14,441 [INFO] num object categories of cat_det 638
+2026-08-26 15:29:14,441 [INFO] num classes of cat_det 638
+2026-08-26 15:29:14,441 [INFO] num images for inst_det: 35028
+2026-08-26 15:29:14,441 [INFO] num annotations for inst_det 185467
+2026-08-26 15:29:14,441 [INFO] num object categories of inst_det 251
+2026-08-26 15:29:14,441 [INFO] num classes of inst_det 4098
+2026-08-26 15:29:14,441 [INFO] Index created.
+No cached predictions found. Starting model inference with Grounding DINO...
+Saving predictions checkpoint to results/predictions/EgoObjects_predictions_gdino_1pct_seed42.json...
+2026-08-26 15:34:59,402 [INFO] Generating 40 sanity check images in results/sanity_checks...
+Evaluating 14078 detections...
+Using 1 CPU processes for evaluation.
+2026-08-26 15:34:59,665 [INFO] num category detections 14078
+2026-08-26 15:34:59,665 [INFO] num instance detections 0
+2026-08-26 15:35:11,809 [INFO] after limit detections per image, len inst_det 0
+2026-08-26 15:35:11,812 [INFO] Creating index.
+2026-08-26 15:35:11,817 [INFO] cat_det, len img_ann_map 351
+2026-08-26 15:35:11,817 [INFO] inst_det, len img_ann_map 0
+2026-08-26 15:35:12,070 [INFO] num total images: 35165
+2026-08-26 15:35:12,070 [INFO] num images for cat_det: 351
+2026-08-26 15:35:12,070 [INFO] num annotations for cat_det 14078
+2026-08-26 15:35:12,070 [INFO] num object categories of cat_det 638
+2026-08-26 15:35:12,070 [INFO] num classes of cat_det 638
+2026-08-26 15:35:12,070 [INFO] num images for inst_det: 0
+2026-08-26 15:35:12,070 [INFO] num annotations for inst_det 0
+2026-08-26 15:35:12,070 [INFO] num object categories of inst_det 251
+2026-08-26 15:35:12,070 [INFO] num classes of inst_det 0
+2026-08-26 15:35:12,070 [INFO] Index created.
+2026-08-26 15:35:12,073 [INFO] cat_det, num class ids 638
+2026-08-26 15:35:12,073 [INFO] Running per image evaluation for cat_det.
+2026-08-26 15:35:12,073 [INFO] cat_det, len params img_ids 351
+2026-08-26 15:35:12,073 [INFO] cat_det, len params class_ids 638
+2026-08-26 15:35:12,075 [INFO] cat_det, len gts 1913
+2026-08-26 15:35:12,075 [INFO] cat_det, len dts 14078
+2026-08-26 15:35:15,063 [INFO] num_processes 1
+2026-08-26 15:35:16,375 [INFO] Elapsed time of cat_det evaluate(): 4.30 sec
+2026-08-26 15:35:16,384 [INFO] Accumulating evaluation results for cat_det.
+2026-08-26 15:35:16,438 [INFO] Summarize detection results for cat_det.
+2026-08-26 15:35:16,451 [INFO] print results for cat_det
+2026-08-26 15:35:16,451 [INFO]  AP           @[ IoU=0.50:0.95 | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.358
+2026-08-26 15:35:16,451 [INFO]  AP           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.426
+2026-08-26 15:35:16,451 [INFO]  AP           @[ IoU=0.75      | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.378
+2026-08-26 15:35:16,451 [INFO]  AR           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.504
+
+(ovod) miro@spectra-120:~/Code/Projects/general-object-detection$ p3 egoobjects_eval.py --model gemini --percentage 1
+2026-08-26 14:37:52,925 [INFO] annotation_path EgoObjects/data/EgoObjectsV1_unified_eval.json
+2026-08-26 14:37:54,323 [INFO] num cat det instances 196123
+2026-08-26 14:37:54,323 [INFO] num inst det instances 185467
+2026-08-26 14:37:54,323 [INFO] Creating index.
+2026-08-26 14:37:54,362 [INFO] cat_det, len img_ann_map 35165
+2026-08-26 14:37:54,490 [INFO] inst_det, len img_ann_map 35028
+2026-08-26 14:37:57,069 [INFO] num total images: 35165
+2026-08-26 14:37:57,069 [INFO] num images for cat_det: 35165
+2026-08-26 14:37:57,069 [INFO] num annotations for cat_det 196123
+2026-08-26 14:37:57,069 [INFO] num object categories of cat_det 638
+2026-08-26 14:37:57,069 [INFO] num classes of cat_det 638
+2026-08-26 14:37:57,069 [INFO] num images for inst_det: 35028
+2026-08-26 14:37:57,069 [INFO] num annotations for inst_det 185467
+2026-08-26 14:37:57,069 [INFO] num object categories of inst_det 251
+2026-08-26 14:37:57,069 [INFO] num classes of inst_det 4098
+2026-08-26 14:37:57,069 [INFO] Index created.
+No cached predictions found. Starting model inference with Gemini API...
+Saving predictions checkpoint to results/predictions/EgoObjects_predictions_gemini_1pct_seed42.json...
+2026-08-26 15:14:28,658 [INFO] Generating 40 sanity check images in results/sanity_checks...
+Evaluating 2396 detections...
+Using 1 CPU processes for evaluation.
+2026-08-26 15:14:28,926 [INFO] num category detections 2396
+2026-08-26 15:14:28,926 [INFO] num instance detections 0
+2026-08-26 15:14:39,763 [INFO] after limit detections per image, len inst_det 0
+2026-08-26 15:14:39,763 [INFO] Creating index.
+2026-08-26 15:14:39,767 [INFO] cat_det, len img_ann_map 351
+2026-08-26 15:14:39,767 [INFO] inst_det, len img_ann_map 0
+2026-08-26 15:14:40,022 [INFO] num total images: 35165
+2026-08-26 15:14:40,022 [INFO] num images for cat_det: 351
+2026-08-26 15:14:40,022 [INFO] num annotations for cat_det 2396
+2026-08-26 15:14:40,022 [INFO] num object categories of cat_det 638
+2026-08-26 15:14:40,022 [INFO] num classes of cat_det 638
+2026-08-26 15:14:40,022 [INFO] num images for inst_det: 0
+2026-08-26 15:14:40,022 [INFO] num annotations for inst_det 0
+2026-08-26 15:14:40,022 [INFO] num object categories of inst_det 251
+2026-08-26 15:14:40,022 [INFO] num classes of inst_det 0
+2026-08-26 15:14:40,022 [INFO] Index created.
+2026-08-26 15:14:40,024 [INFO] cat_det, num class ids 638
+2026-08-26 15:14:40,024 [INFO] Running per image evaluation for cat_det.
+2026-08-26 15:14:40,024 [INFO] cat_det, len params img_ids 351
+2026-08-26 15:14:40,024 [INFO] cat_det, len params class_ids 638
+2026-08-26 15:14:40,026 [INFO] cat_det, len gts 1913
+2026-08-26 15:14:40,026 [INFO] cat_det, len dts 2396
+2026-08-26 15:14:43,591 [INFO] num_processes 1
+2026-08-26 15:14:44,881 [INFO] Elapsed time of cat_det evaluate(): 4.86 sec
+2026-08-26 15:14:44,890 [INFO] Accumulating evaluation results for cat_det.
+2026-08-26 15:14:44,943 [INFO] Summarize detection results for cat_det.
+2026-08-26 15:14:44,957 [INFO] print results for cat_det
+2026-08-26 15:14:44,957 [INFO]  AP           @[ IoU=0.50:0.95 | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.488
+2026-08-26 15:14:44,957 [INFO]  AP           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.582
+2026-08-26 15:14:44,957 [INFO]  AP           @[ IoU=0.75      | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.522
+2026-08-26 15:14:44,957 [INFO]  AR           @[ IoU=0.5       | area=   all | background=   all | lighting=   all | maxDets=100 catIds=all-top] = 0.594
